@@ -22,7 +22,7 @@ This code has been tested with the following software versions:
 * org.apache.spark.api.java
 * org.neo4j.driver
 * org.apache.spark.sql
-* package created : FilterAndReader.*;
+* package created : FilterAndReader
 
 **Link material**
 
@@ -54,7 +54,7 @@ Final Output : Binomial test
 * Count: The class that contains the attributes ( kmer,count, regionwt,type, regionmut)
 * Filter: These symbols @, 5, +, >, are deleted from substring
 * FileReader: This class is used to read both the reference genome file and the mutation file
-* Sequence:
+* Sequence: this wrapper class which encapsulates information , implements the interface Serializable
 * Tumor: wrapper class that encapsulates information
 * Normal: wrapper class that encapsulates information
 
