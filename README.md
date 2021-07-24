@@ -1,6 +1,6 @@
 # UniqueKmerSequence
 
-This repo examine the mutations that occur in the human genome (reference genome) . To identify these somatic mutations has been developed a method that uses k-mer(short segment of DNA sequence) counts.
+This repo examines the mutations that occur in the human genome (reference genome) . To identify these somatic mutations has been developed a method that uses k-mer(short segment of DNA sequence) counts.
 
 **Description of the algorithm**
 
