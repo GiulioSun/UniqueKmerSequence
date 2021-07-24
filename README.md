@@ -58,6 +58,7 @@ Final Output : Binomial test
 * Tumor: wrapper class that encapsulates information
 * Normal: wrapper class that encapsulates information
 * TempView: manages the exceptions of tempview
+* BinomialT: class that is used to implement the binomial test
 
 
 
