@@ -59,15 +59,27 @@ Final Output : Binomial test
 
 Main:
 1.Read input files
+
 2.Insert the mutations in the reference genome
+
 3.The wildtype regions and mutated regions from which I get the k-mers
+
 4.I choose the unique k-mers of mutated regions and wildtype regions
+
 5.Import of normal sample and tumor sample files
+
 6.Filtering the files of the two samples
+
 7.Find the k-mers of the two samples
+
 8.k-mers counts
+
 9.We perform a join to find normal sequences in wild-type and mutated sequences
+
 10.Calculation of the median of wild-type and mutant counts for each mutation (the median was calculated for the normal sample and for the tumor sample)
+
 11.Calculation of the test binomial test to validate the mutation
+
 12.Connection with neo4j
+
 13.Creation of these nodes (normNode, tumorNode, regionNode) and related relationships
