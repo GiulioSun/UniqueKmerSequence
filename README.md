@@ -26,7 +26,7 @@ This code has been tested with the following software versions:
 
 **Link material**
 
-*link to download the files*
+*link to download the files (Test Folder) *
 
 https://dna-discovery.stanford.edu/publicmaterial/software/kmervc/
 
