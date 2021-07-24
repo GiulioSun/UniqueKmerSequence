@@ -35,7 +35,7 @@ public class Main {
 
 	public static void main(String[] args) {
 	
-		FilterAndReader.FileReader d = new FileReader();
+		FileReader d = new FileReader();
 
 		// Lettura del file del genoma di riferimento tramite la classe file reader
 
@@ -94,8 +94,8 @@ public class Main {
 
 		//I file importati contengono caratteri da eliminare, questa pulizia Ë effettuata tramite la classe Filter
 
-		JavaRDD<String> normClean = normal.filter(new FilterAndReader.Filter());
-		JavaRDD<String> tumorClean = tumor.filter(new FilterAndReader.Filter());
+		JavaRDD<String> normClean = normal.filter(new Filter());
+		JavaRDD<String> tumorClean = tumor.filter(new Filter());
 
 		//Calcolo dei kmer dei due campioni attraverso la classe KmerSample e calcolo dei counts attraverso un reducebykey
 
