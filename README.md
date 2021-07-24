@@ -66,7 +66,7 @@ Main:
 
 3.The wildtype regions and mutated regions from which I get the k-mers
 
-4.I choose the unique k-mers of mutated regions and wildtype regions
+4.Choose the unique k-mers of mutated regions and wildtype regions
 
 5.Import of normal sample and tumor sample files
 
