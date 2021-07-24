@@ -10,8 +10,8 @@ Starting from the reference genome, we consider some mutations  that are inserte
 
 This code has been tested with the following software versions:
 
-Apache Spark 2.4.8
-Neo4j 4.2.1
+* Apache Spark 2.4.8
+* Neo4j 4.2.1
 
 **Packages used in java**
 
@@ -22,6 +22,7 @@ Neo4j 4.2.1
 * org.apache.spark.api.java
 * org.neo4j.driver
 * org.apache.spark.sql
+* package created : FilterAndReader
 
 **Link material**
 
