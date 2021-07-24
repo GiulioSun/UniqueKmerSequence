@@ -11,7 +11,7 @@ public class KmerSample implements PairFlatMapFunction<String, String, Integer> 
 
 	public java.util.Iterator<Tuple2<String,Integer>>	call(String seq){
 
-		int k = 10;
+		int k = 31;
 
 		List <Tuple2<String, Integer>> list = new ArrayList<>();
 

@@ -56,7 +56,7 @@ public class FileReader {
 			while (myReader.hasNextLine()) {
 
 				stringa = myReader.nextLine();
-				//	stringa.replace(">", "");
+
 			}
 
 			myReader.close();

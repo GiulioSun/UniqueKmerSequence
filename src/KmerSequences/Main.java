@@ -3,9 +3,8 @@ package KmerSequences;
 import FilterAndReader.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+
 
 
 import org.apache.log4j.Level;
@@ -15,8 +14,6 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
-import org.apache.spark.network.protocol.Encoders;
-import org.apache.spark.sql.AnalysisException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -34,16 +31,16 @@ import scala.Tuple4;
 public class Main {
 
 	public static void main(String[] args) {
-	
+
 		FileReader d = new FileReader();
 
 		// Lettura del file del genoma di riferimento tramite la classe file reader
 
-		String ref = d.fileReader2("data2/chrT.txt");
+		String ref = d.fileReader2("data/chrT.txt");
 
 		// Lettura del file delle mutazioni tramite la classe file reader
 
-		List<String> readMutation = d.fileReader("data2/variants.txt");
+		List<String> readMutation = d.fileReader("data/variants.txt");
 		List<Mutation> mutation = new ArrayList<>();
 
 		for (String x : readMutation) {
@@ -59,7 +56,7 @@ public class Main {
 
 		// Fisso il valore di k per la lunghezza dei k mer
 
-		int k = 10;
+		int k = 31;
 
 		List<Tuple2<String, String>> region = ng.genMutation(mutation, ref, k);
 
@@ -81,16 +78,14 @@ public class Main {
 
 		JavaRDD<Tuple2<String, String>> region1 = jsc.parallelize(region);
 
-		System.out.println(region1.take(5));
-		
 		//Creazione dei kmers unici per le regioni del riferimento
 
 		JavaPairRDD<String, String> region2 = region1.flatMapToPair(new KmerRif()).distinct();
 
 		//Importazione dei genoma tumore e normale 
 
-		JavaRDD<String> normal = jsc.textFile("data2/Norm.txt");
-		JavaRDD<String> tumor = jsc.textFile("data2/tum.txt");
+		JavaRDD<String> normal = jsc.textFile("data/normal.txt");
+		JavaRDD<String> tumor = jsc.textFile("data/tumor.txt");
 
 		//I file importati contengono caratteri da eliminare, questa pulizia Ë effettuata tramite la classe Filter
 
@@ -102,8 +97,6 @@ public class Main {
 		JavaPairRDD<String, Integer> CountNormal = normClean.flatMapToPair(new KmerSample()).reduceByKey((x, y) -> x + y);
 
 		JavaPairRDD<String, Integer> CountTumor = tumorClean.flatMapToPair(new KmerSample()).reduceByKey((x, y) -> x + y);
-
-		System.out.println(CountTumor.collect());
 
 		// Calcolo dei count dei campioni sul riferimento attraverso una join
 
@@ -152,17 +145,13 @@ public class Main {
 				+ "INNER JOIN counts3 ON counts3.regionwt=counts1.regionwt AND counts3.regionmut = counts1.regionmut AND counts3.type = counts1.type\r\n order by counts3.regionwt, counts3.type";
 
 		Dataset<Row> interoutput = spark.sql(query3);
-		
-		tV.createView(interoutput, "counts4");		
-		
-		interoutput.show();
-		
+
 		//Passaggio dal dataframe a due RDD di oggetti, Normal e Tumor
 
 		JavaRDD<Tumor> dataTumor = interoutput.toJavaRDD().map(new Function<Row, Tumor>() {
 			@Override
 			public Tumor call(Row row) {
-				Tumor tum = new Tumor(row.getString(0), row.getString(1), row.getString(2), row.getDouble(3));
+				Tumor tum = new Tumor(row.getString(0), row.getString(1), row.getString(2), row.getDouble(4));
 
 				return tum;
 			}
@@ -214,15 +203,20 @@ public class Main {
 
 		}
 
-		for (String f : binomiaListTumor ) {
+		for (String i : binomiaListTumor ) {
 
-			System.out.println(f);
+			System.out.println(i);
+		}
+
+		for (String i : binomiaListNorm ) {
+
+			System.out.println(i);
 		}
 
 		// Connessione a neo4j
 
 		String uri = "bolt://localhost:7687";
-		AuthToken token = AuthTokens.basic("neo4j", "neo4j");
+		AuthToken token = AuthTokens.basic("neo4j", "Prova");
 		Driver driver = GraphDatabase.driver(uri, token);
 		Session s = driver.session();
 		System.out.println("Connessione stabilita!");
@@ -276,6 +270,7 @@ public class Main {
 		}
 
 		for (Tuple4<String, String, String, String> a: regionForNeo) {
+			
 			String regionwt = a._2().toString();
 			String regionmut = a._3().toString();
 			String seq = a._1().toString();

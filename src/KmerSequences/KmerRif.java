@@ -11,7 +11,7 @@ public class KmerRif implements PairFlatMapFunction<Tuple2<String, String>,  Str
 
 	public java.util.Iterator<Tuple2<String,String>>	call(Tuple2<String, String> seq){
 
-		int k = 10;
+		int k = 31;
 
 		List <Tuple2<String, String>> list = new ArrayList<>();
 
