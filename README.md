@@ -1,10 +1,10 @@
 # UniqueKmerSequence
 
-This repo examines the mutations that occur in the human genome (reference genome) . To identify these somatic mutations has been developed a method that uses k-mer(short segment of DNA sequence) counts.
+This repo examine the mutations that occur in the human genome (reference genome) . To identify these somatic mutations has been developed a method that uses k-mer(short segment of DNA sequence) counts.
 
 **Description of the algorithm**
 
-Starting from the reference genome, we consider some mutations  that are inserted by substitution within the reference genome. From the new genome we extract the wild-type and mutated regions. From the regions are extracted the k-mers,  that  come from wild-type region or from  mutated region,  from the k-mers  we go to take only the unique. We then consider two samples, one tumor and one normal, so we extract the k-mers from the two samples and count them. After we perform two joins , one to find normal sequences in wild-type sequences and in  mutated sequences and another to find mutation sequences in wild-type sequences and in mutated sequences. In the last steps we calculate the median counts of mutant k-mers and wild-type k-mers within the normal sample and the tumor sample. The differences between the two median counts will serve us to implement the binomial test that will allow us to validate or not a certain mutation.
+Starting from the reference genome, we consider some mutations  that are inserted by substitution within the reference genome. From the new genome we extract the wild-type and mutated regions. From the regions are extracted the k-mers,  that  come from wild-type region or from  mutated region,  from the k-mers  we go to take only the unique. We then consider two samples, one tumor and one normal, so we extract the k-mers from the two samples and count them. After we perform two joins , one to find normal sequences in wild-type regions and in  mutated regions and another to find mutation regions in wild-type regions and in mutated regions. In the last steps we calculate the median counts of mutant regions and wild-type regions within the normal sample and the tumor sample. The differences between the two median counts (WildType-Mutant) will serve us to implement the binomial test that will allow us to validate or not a certain mutation.
 
 **Requirements**
 
@@ -52,7 +52,7 @@ Final Output : Mutation Validation by Binomial test
 * KmerSample: k-mers of the normal sample and the tumor sample
 * Mutation: substitutions with mutations in certain positions within the reference genome
 * Count: The class that contains the attributes ( kmer,count, regionwt,type, regionmut)
-* Filter: These symbols @, 5, +, >, are filtered from substring
+* Filter: These symbols @, 5, +, >, are filtered from substrings
 * FileReader: This class is used to read both the reference genome file and the mutation file
 * Sequence: this wrapper class which encapsulates information , implements the interface Serializable
 * Tumor: wrapper class that encapsulates information
@@ -68,7 +68,7 @@ Main:
 
 2.Insert the mutations in the reference genome
 
-3.The wildtype regions and mutated regions from which I get the k-mers
+3.Obtain wildtype regions and mutated regions from which we get the k-mers
 
 4.Choose the unique k-mers of mutated regions and wildtype regions
 
@@ -78,12 +78,12 @@ Main:
 
 7.Find the k-mers of the two samples
 
-8.k-mers counts
+8.k-mers counts of the two samples
 
-9.We perform a join to find normal sequences in wild-type and mutated sequences
+9.Perform a join to find normal sequences in wild-type and mutated regions of reference genome
 
 10.Calculation of the median of wild-type and mutant counts for each mutation (the median was calculated for the normal sample and for the tumor sample)
 
-11.Calculation of the test binomial test to validate the mutation
+11.Binomial test to validate the mutations
 
 12.Data are reported on neo4j
