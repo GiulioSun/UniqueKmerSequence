@@ -46,16 +46,16 @@ Final Output : Binomial test
 
 **Description of the java-eclipse classes**
 
-NewGen: the new genome built by inserting the mutations into the reference genome
-KmerRif: k-mers of mutated and wild-type regions
-KmerSample: k-mers of the normal sample and the tumor sample
-Mutation: substitutions with mutations in certain positions within the reference genome
-Count: The class that contains the attributes ( kmer,count, regionwt,type, regionmut)
-Filter: These symbols @, 5, +, >, are deleted from substring
-FileReader: This class is used to read both the reference genome file and the mutation file
-Sequence:
-Tumor: wrapper class that encapsulates information
-Normal: wrapper class that encapsulates information
+* NewGen: the new genome built by inserting the mutations into the reference genome
+* KmerRif: k-mers of mutated and wild-type regions
+* KmerSample: k-mers of the normal sample and the tumor sample
+* Mutation: substitutions with mutations in certain positions within the reference genome
+* Count: The class that contains the attributes ( kmer,count, regionwt,type, regionmut)
+* Filter: These symbols @, 5, +, >, are deleted from substring
+* FileReader: This class is used to read both the reference genome file and the mutation file
+* Sequence
+* Tumor: wrapper class that encapsulates information
+* Normal: wrapper class that encapsulates information
 
 Main:
 1.Read input files
