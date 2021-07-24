@@ -43,7 +43,7 @@ Input files
 
 Intermediate Output : Median counts of wild-type and mutant k-mers in tumor sample and in normal sample
 
-Final Output : Binomial test
+Final Output : Mutation Validation by Binomial test
 
 **Description of the java-eclipse classes**
 
@@ -52,7 +52,7 @@ Final Output : Binomial test
 * KmerSample: k-mers of the normal sample and the tumor sample
 * Mutation: substitutions with mutations in certain positions within the reference genome
 * Count: The class that contains the attributes ( kmer,count, regionwt,type, regionmut)
-* Filter: These symbols @, 5, +, >, are deleted from substring
+* Filter: These symbols @, 5, +, >, are filtered from substring
 * FileReader: This class is used to read both the reference genome file and the mutation file
 * Sequence: this wrapper class which encapsulates information , implements the interface Serializable
 * Tumor: wrapper class that encapsulates information
@@ -86,4 +86,4 @@ Main:
 
 11.Calculation of the test binomial test to validate the mutation
 
-12.Reported the results obtained on neo4j
+12.Data are reported on neo4j
