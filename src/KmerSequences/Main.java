@@ -36,11 +36,11 @@ public class Main {
 
 		// Lettura del file del genoma di riferimento tramite la classe file reader
 
-		String ref = d.fileReader2("data/chrT.txt");
+		String ref = d.fileReader2("data/chrT.fa");
 
 		// Lettura del file delle mutazioni tramite la classe file reader
 
-		List<String> readMutation = d.fileReader("data/variants.txt");
+		List<String> readMutation = d.fileReader("data/variants.bed");
 		List<Mutation> mutation = new ArrayList<>();
 
 		for (String x : readMutation) {
@@ -84,8 +84,8 @@ public class Main {
 
 		//Importazione dei genoma tumore e normale 
 
-		JavaRDD<String> normal = jsc.textFile("data/normal.txt");
-		JavaRDD<String> tumor = jsc.textFile("data/tumor.txt");
+		JavaRDD<String> normal = jsc.textFile("data/normal-1.fq");
+		JavaRDD<String> tumor = jsc.textFile("data/tumor-1.fq");
 
 		//I file importati contengono caratteri da eliminare, questa pulizia Ë effettuata tramite la classe Filter
 
