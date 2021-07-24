@@ -35,7 +35,7 @@ https://dna-discovery.stanford.edu/publicmaterial/software/kmervc/
 Input files
 
 * chrT.fa : file of the reference genome
-* Mut.txt : file of mutations
+* variants.bed : file of mutations
 * normal-1.fq : file of the normal sample
 * tumor-1.fq : file of the tumor sample
 
@@ -57,6 +57,9 @@ Final Output : Binomial test
 * Sequence: this wrapper class which encapsulates information , implements the interface Serializable
 * Tumor: wrapper class that encapsulates information
 * Normal: wrapper class that encapsulates information
+* TempView: manages the exceptions of tempview
+
+
 
 Main:
 
@@ -82,6 +85,4 @@ Main:
 
 11.Calculation of the test binomial test to validate the mutation
 
-12.Connection with neo4j
-
-13.Creation of these nodes (normNode, tumorNode, regionNode) and related relationships
+12.Reported the results obtained on neo4j
