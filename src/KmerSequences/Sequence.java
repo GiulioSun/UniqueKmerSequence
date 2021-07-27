@@ -18,6 +18,10 @@ public  class Sequence implements Serializable{
 		this.seq = seq;
 		this.median = median;
 	}
+	
+	public Sequence() {
+		
+	}
 	public String getRegionWt() {
 		return regionWt;
 	}

@@ -2,10 +2,14 @@ package KmerSequences;
 
 import FilterAndReader.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Scanner;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -30,17 +34,17 @@ import scala.Tuple4;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 
 		FileReader d = new FileReader();
 
 		// Lettura del file del genoma di riferimento tramite la classe file reader
 
-		String ref = d.fileReader2("data/chrT.fa");
+		String ref = d.fileReader2("data/chrT.txt");
 
 		// Lettura del file delle mutazioni tramite la classe file reader
 
-		List<String> readMutation = d.fileReader("data/variants.bed");
+		List<String> readMutation = d.fileReader("data/variants.txt");
 		List<Mutation> mutation = new ArrayList<>();
 
 		for (String x : readMutation) {
@@ -84,8 +88,8 @@ public class Main {
 
 		//Importazione dei genoma tumore e normale 
 
-		JavaRDD<String> normal = jsc.textFile("data/normal-1.fq");
-		JavaRDD<String> tumor = jsc.textFile("data/tumor-1.fq");
+		JavaRDD<String> normal = jsc.textFile("data/normal-1.txt");
+		JavaRDD<String> tumor = jsc.textFile("data/tumor-1.txt");
 
 		//I file importati contengono caratteri da eliminare, questa pulizia Ë effettuata tramite la classe Filter
 
@@ -180,7 +184,7 @@ public class Main {
 		List<String> binomiaListTumor = new ArrayList<>();
 
 		List<String> binomiaListNorm = new ArrayList<>();
-
+		
 		List<Tuple2<String, Double>> reduceTumor2 = reduceTumor.collect();
 
 		List<Tuple2<String, Double>> reduceNorm2 = reduceNorm.collect();
@@ -202,21 +206,15 @@ public class Main {
 			binomiaListNorm.add(s._1 + "{ " + bT.binomialTest(0.0003, abs , 16000, 0.01) + " }");
 
 		}
-
-		for (String i : binomiaListTumor ) {
-
-			System.out.println(i);
-		}
-
-		for (String i : binomiaListNorm ) {
-
-			System.out.println(i);
-		}
-
+		
+		Scanner scan;System.out.println("Premi invio per concludere l'esecuzione");
+		scan = new Scanner(System.in);
+		scan.next();
+		
 		// Connessione a neo4j
 
 		String uri = "bolt://localhost:7687";
-		AuthToken token = AuthTokens.basic("neo4j", "Prova");
+		AuthToken token = AuthTokens.basic("neo4j", "neo4j");
 		Driver driver = GraphDatabase.driver(uri, token);
 		Session s = driver.session();
 		System.out.println("Connessione stabilita!");
